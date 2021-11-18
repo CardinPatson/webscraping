@@ -15,11 +15,20 @@ if res.ok:
 
     rep.prettify()
     print(rep.title)
+    print(rep.title.string)  # afficher  le contenu de la balise
 
-    # liste = rep.find_by_id("Pays_list.C3.A9s")
+    print(rep.find_all("a"))  # rechercher toutes les balises <a>
+
+    print(rep.find(id="États_dont_la_souveraineté_est_contestée"))
 
     # Preciser le parser que tu veux
     # print(rep.find("title"))
+
+    # extract url in <a> tag in a page
+    for link in rep.find_all('a'):
+        print(link.get("href"))
+
+    text_page = rep.get_text()  # extraire tous le texte de la page
 
 # print(res.headers)
 # print(res.text)  #res.text si on veut afficher la pagesu
