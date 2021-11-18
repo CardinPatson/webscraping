@@ -30,5 +30,20 @@ if res.ok:
 
     text_page = rep.get_text()  # extraire tous le texte de la page
 
+    # ==================================
+    # NAVIGER A PARTIR DES NOM DES TAGS
+    # ==================================
+
+    # .content and .children
+    print(rep.body)
+
+    # Met tout ce qui se trouve dans le head dans un tableau
+    print(rep.head.content)
+
+    # iterer sur les balises enfants
+    for child in rep.head.children:
+        print(child)
+
+
 # print(res.headers)
 # print(res.text)  #res.text si on veut afficher la pagesu
