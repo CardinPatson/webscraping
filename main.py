@@ -16,21 +16,27 @@ if __name__ == "__main__":
         with open('./data/test.html') as fd:
             # print(f.read())
             soup = BeautifulSoup(fd, 'html.parser')
-            print(soup)
+
     except FileNotFoundError:
         print("Fichier introuvable")
 
-    tab_body = soup.body.content
+    tab_body = soup.body.contents  # Recuperer tous les enfants de body
 
-    print(tab_body)
+    print("Tous les enfants du body -->", tab_body)
 
     # Possible d'acceder au attribut d'une balise en traitant la balise comme un dictionnaire
 
-    print(soup.p["id"])
+    print("Id du first p -->", soup.p["id"])
 
     # Pour acceder directement au dictionnaire
 
-    print(soup.p.attrs)
+    print("Dictionnaires contenant les attributs de p -->", soup.p.attrs)
+
+    # Ajouter toutes les balises p dans un tableau
+
+    print("Tous les paragraphes -->", soup.find_all("p"))
+
+    #
 
     res = requests.get(url)
     if not res.ok:
