@@ -12,38 +12,42 @@ url = "https://fr.wikipedia.org/wiki/Liste_des_pays_du_monde"
 
 
 if __name__ == "__main__":
-    try:
-        with open('./data/test.html') as fd:
-            # print(f.read())
-            soup = BeautifulSoup(fd, 'html.parser')
 
-    except FileNotFoundError:
-        print("Fichier introuvable")
 
-    tab_body = soup.body.contents  # Recuperer tous les enfants de body
+    # try:
+    #     with open('./data/test.html') as fd:
+    #         # print(f.read())
+    #         soup = BeautifulSoup(fd, 'html.parser')
 
-    print("Tous les enfants du body -->", tab_body)
+    # except FileNotFoundError:
+    #     print("Fichier introuvable")
 
-    # Possible d'acceder au attribut d'une balise en traitant la balise comme un dictionnaire
+    # tab_body = soup.body.contents  # Recuperer tous les enfants de body
 
-    print("Id du first p -->", soup.p["id"])
+    # print("Tous les enfants du body -->", tab_body)
 
-    # Pour acceder directement au dictionnaire
+    # # Possible d'acceder au attribut d'une balise en traitant la balise comme un dictionnaire
 
-    print("Dictionnaires contenant les attributs de p -->", soup.p.attrs)
+    # print("Id du first p -->", soup.p["id"])
 
-    # Ajouter toutes les balises p dans un tableau
+    # # Pour acceder directement au dictionnaire
 
-    print("Tous les paragraphes -->", soup.find_all("p"))
+    # print("Dictionnaires contenant les attributs de p -->", soup.p.attrs)
 
-    #
+    # # Ajouter toutes les balises p dans un tableau
+
+    # print("Tous les paragraphes -->", soup.find_all("p"))
+
+    # #
 
     res = requests.get(url)
-    if not res.ok:
+    
+    if res.ok:
         # Permet de parser et de chercher les elts à l'intérieur
         rep = BeautifulSoup(res.text, "html.parser")
 
         rep.prettify()
+
         print(rep.title)  # Affiche la balise title et son contenu
 
         print(rep.title.name)  # Affiche le nom de la balise
@@ -87,3 +91,9 @@ if __name__ == "__main__":
 
     # print(res.headers)
     # print(res.text)  #res.text si on veut afficher la pagesu
+
+        try:
+            with open("./data/pays.txt" , "w") as pays:
+                pays.write(rep.text)
+        except FileExistsError:
+            print('file exist error')
